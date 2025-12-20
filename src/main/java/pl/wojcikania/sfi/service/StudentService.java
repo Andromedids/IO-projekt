@@ -1,5 +1,6 @@
 package pl.wojcikania.sfi.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -15,23 +16,32 @@ public class StudentService {
   @Autowired
   private StudentRepository studentRepository;
 
-  public List<Student> getStudents() {
-    return studentRepository.findAll().stream()
-        .map(StudentService::getStudent)
-        .toList();
+    public StudentService(StudentRepository studentRepository) {
+        this.studentRepository = studentRepository;
+    }
+
+    public List<Student> getStudents() {
+      List<Student> list = new ArrayList<>();
+      List<StudentEntity> studentsFromDatabase = studentRepository.findAll();
+      for (StudentEntity studentEntity : studentsFromDatabase) {
+          Student student = getStudent(studentEntity);
+          list.add(student);
+      }
+      return list;
   }
 
   private static Student getStudent(StudentEntity studentEntity) {
-    return Student
+      List<Long> list = new ArrayList<>();
+      for (WorkshopEntity workshopEntity : studentEntity.getWorkshopsForThisStudent()) {
+          Long workshopId = workshopEntity.getWorkshopId();
+          list.add(workshopId);
+      }
+      return Student
         .builder()
         .studentName(studentEntity.getStudentName())
         .studentSurname(studentEntity.getStudentSurname())
         .studentId(studentEntity.getStudentId())
-        .workshopsForThisStudent(studentEntity
-            .getWorkshopsForThisStudent()
-            .stream()
-            .map(WorkshopEntity::getWorkshopId)
-            .collect(Collectors.toList()))
+        .workshopsForThisStudent(list)
         .build();
   }
 

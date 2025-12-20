@@ -16,7 +16,11 @@ public class WorkshopService {
   @Autowired
   private WorkshopRepository workshopRepository;
 
-  public List<Workshop> getWorkshops() {
+    public WorkshopService(WorkshopRepository workshopRepository) {
+        this.workshopRepository = workshopRepository;
+    }
+
+    public List<Workshop> getWorkshops() {
     return workshopRepository.findAll().stream()
         .map(WorkshopService::getWorkshop)
         .toList();

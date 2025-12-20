@@ -3,6 +3,7 @@ package pl.wojcikania.sfi.service;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.wojcikania.sfi.domain.StudentEntity;
@@ -11,6 +12,7 @@ import pl.wojcikania.sfi.dto.Workshop;
 import pl.wojcikania.sfi.repositories.WorkshopRepository;
 
 @Service
+@AllArgsConstructor
 public class WorkshopService {
 
   @Autowired

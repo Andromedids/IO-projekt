@@ -24,16 +24,16 @@ public class DobryStudentServiceUnitTest {
     @Mock
     StudentRepository studentRepository;
     @Mock
-    private StudentEntity jaStudent;
+    private StudentEntity meStudent;
     @Mock
-    private StudentEntity onStudent;
+    private StudentEntity heStudent;
     @Mock
-    private WorkshopEntity geologiaStrukturalna;
+    private WorkshopEntity structuralGeology;
     @Mock
-    private WorkshopEntity kartografiaGeologiczna;
+    private WorkshopEntity geologicalMapping;
 
     @Test
-    public void niechzeZwrociListeStudentow() {
+    public void LetItGiveBackStudentsList() {
         //given
 
         //when

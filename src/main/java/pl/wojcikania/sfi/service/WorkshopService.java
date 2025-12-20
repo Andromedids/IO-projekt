@@ -1,5 +1,6 @@
 package pl.wojcikania.sfi.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -19,12 +20,22 @@ public class WorkshopService {
   private WorkshopRepository workshopRepository;
 
   public List<Workshop> getWorkshops() {
-    return workshopRepository.findAll().stream()
-        .map(WorkshopService::getWorkshop)
-        .toList();
+    List<Workshop> list = new ArrayList<>();
+    List<WorkshopEntity> workshopsFromDatabase = workshopRepository.findAll();
+    for (WorkshopEntity workshopEntity : workshopsFromDatabase) {
+      Workshop workshop = getWorkshop(workshopEntity);
+      list.add(workshop);
+    }
+    return list;
   }
 
   private static Workshop getWorkshop(WorkshopEntity workshopEntity) {
+    List<Long> list = new ArrayList<>();
+    List<StudentEntity> workshopsForThisStudent = workshopEntity.getStudentsAtThisWorkshop();
+    for (StudentEntity studentEntity : workshopsForThisStudent) {
+      Long studentId = studentEntity.getStudentId();
+      list.add(studentId);
+    }
     return Workshop
         .builder()
         .presenterId(workshopEntity.getPresenter().getPresenterId())
@@ -32,11 +43,7 @@ public class WorkshopService {
         .workshopDateTime(workshopEntity.getWorkshopDateTime())
         .workshopDescription(workshopEntity.getWorkshopDescription())
         .workshopTitle(workshopEntity.getWorkshopTitle())
-        .studentsAtThisWorkshop(workshopEntity
-            .getStudentsAtThisWorkshop()
-            .stream()
-            .map(StudentEntity::getStudentId)
-            .collect(Collectors.toList()))
+        .studentsAtThisWorkshop(list)
         .build();
   }
 

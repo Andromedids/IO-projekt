@@ -40,7 +40,7 @@ public class StudentController {
       IllegalArgumentException exception,
       HttpServletRequest httpServletRequest
   ) {
-    log.warn("bad student id was provided");
+    log.warn("bad. student id was provided");
     return new ResponseEntity<>("Provided id is not valid", NOT_FOUND);
   }
 }

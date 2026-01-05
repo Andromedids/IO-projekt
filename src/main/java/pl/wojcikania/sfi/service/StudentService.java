@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.wojcikania.sfi.domain.StudentEntity;
@@ -12,6 +13,7 @@ import pl.wojcikania.sfi.dto.Student;
 import pl.wojcikania.sfi.repositories.StudentRepository;
 
 @Service
+@AllArgsConstructor
 public class StudentService {
   @Autowired
   private StudentRepository studentRepository;
@@ -31,16 +33,18 @@ public class StudentService {
   }
 
   private static Student getStudent(StudentEntity studentEntity) {
+    List<Long> list = new ArrayList<>();
+    List<WorkshopEntity> workshopsForThisStudent = studentEntity.getWorkshopsForThisStudent();
+    for (WorkshopEntity workshopEntity : workshopsForThisStudent) {
+      Long workshopId = workshopEntity.getWorkshopId();
+      list.add(workshopId);
+    }
     return Student
         .builder()
         .studentName(studentEntity.getStudentName())
         .studentSurname(studentEntity.getStudentSurname())
         .studentId(studentEntity.getStudentId())
-        .workshopsForThisStudent(studentEntity
-            .getWorkshopsForThisStudent()
-            .stream()
-            .map(WorkshopEntity::getWorkshopId)
-            .collect(Collectors.toList()))
+        .workshopsForThisStudent(list)
         .build();
   }
 

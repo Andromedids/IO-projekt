@@ -16,6 +16,9 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.transaction.annotation.Transactional;
 import pl.wojcikania.sfi.domain.WorkshopEntity;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
@@ -60,7 +63,8 @@ public class WorkshopRepositoryTest {
     assertEquals(1, workshopEntity.getWorkshopId());
     assertEquals("CRUDowa aplikacja w 45minut", workshopEntity.getWorkshopTitle());
     assertEquals("postawimy szybko apke javova", workshopEntity.getWorkshopDescription());
-    assertEquals(Instant.parse("2023-03-30T09:10:25.00Z"), workshopEntity.getWorkshopDateTime());
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+    LocalDateTime expectedDate = LocalDateTime.parse("2023-03-30 11:10:25", formatter);
     assertFalse(workshopEntity.getStudentsAtThisWorkshop().isEmpty());
     assertNotNull(workshopEntity.getPresenter());
   }
@@ -69,7 +73,8 @@ public class WorkshopRepositoryTest {
     assertEquals(2, workshopEntity.getWorkshopId());
     assertEquals("Git Machete", workshopEntity.getWorkshopTitle());
     assertEquals("Organizator repozytoriow i narzedzie do automatyzacji rebase i merge", workshopEntity.getWorkshopDescription());
-    assertEquals(Instant.parse("2023-03-30T13:30:00.00Z"), workshopEntity.getWorkshopDateTime());
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+    LocalDateTime expectedDate = LocalDateTime.parse("2023-03-30 15:30:00", formatter);
     assertFalse(workshopEntity.getStudentsAtThisWorkshop().isEmpty());
     assertNotNull(workshopEntity.getPresenter());
   }

@@ -48,7 +48,7 @@ class StudentServiceUnitTest {
         workshopForThisStudent.add(python);
         when(studentRepository.findAll()).thenReturn(studentsFromDatabase);
         when(mateuszJ.getStudentName()).thenReturn("Mateusz");
-        when(mateuszJ.getStudentSurname()).thenReturn("j");
+        when(mateuszJ.getStudentSurname()).thenReturn("J");
         when(mateuszJ.getStudentId()).thenReturn(1L);
         when(mateuszJ.getWorkshopsForThisStudent()).thenReturn(workshopForThisStudent);
         when(krystianB.getStudentName()).thenReturn("Krystian");
@@ -58,10 +58,10 @@ class StudentServiceUnitTest {
         when(java.getWorkshopId()).thenReturn(1L);
         when(python.getWorkshopId()).thenReturn(2L);
         //when
-        List<Student> studnets = studentService.getStudents();
+        List<Student> students = studentService.getStudents();
         //then
 
-        Assertions.assertEquals(2, studnets.size());
+        Assertions.assertEquals(2, students.size());
         List<Student> expected = List.of(
                 Student.builder()
                         .studentId(1L)
@@ -76,6 +76,6 @@ class StudentServiceUnitTest {
                         .workshopsForThisStudent(List.of(1L, 2L))
                         .build()
         );
-        Assertions.assertEquals(expected, studnets);
+        Assertions.assertEquals(expected, students);
     }
 }

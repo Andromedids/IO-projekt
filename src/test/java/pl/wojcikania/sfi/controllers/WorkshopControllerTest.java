@@ -66,12 +66,12 @@ class WorkshopControllerTest {
         .andExpect(jsonPath("$[0].workshopId").value("1"))
         .andExpect(jsonPath("$[0].workshopTitle").value("CRUDowa aplikacja w 45minut"))
         .andExpect(jsonPath("$[0].workshopDescription").value("postawimy szybko apke javova"))
-        .andExpect(jsonPath("$[0].workshopDateTime").value("2023-03-30T09:10:25Z"))
+        .andExpect(jsonPath("$[0].workshopDateTime").value("2023-03-30 11:10:25"))
 
         .andExpect(jsonPath("$[1].workshopId").value("2"))
         .andExpect(jsonPath("$[1].workshopTitle").value("Git Machete"))
         .andExpect(jsonPath("$[1].workshopDescription").value("Organizator repozytoriow i narzedzie do automatyzacji rebase i merge"))
-        .andExpect(jsonPath("$[1].workshopDateTime").value("2023-03-30T13:30:00Z"));
+        .andExpect(jsonPath("$[1].workshopDateTime").value("2023-03-30 15:30:00"));
   }
 
   private static void isOnePresenterReturned(ResultActions perform) throws Exception {
@@ -79,6 +79,6 @@ class WorkshopControllerTest {
         .andExpect(jsonPath("$.workshopId").value("1"))
         .andExpect(jsonPath("$.workshopTitle").value("CRUDowa aplikacja w 45minut"))
         .andExpect(jsonPath("$.workshopDescription").value("postawimy szybko apke javova"))
-        .andExpect(jsonPath("$.workshopDateTime").value("2023-03-30T09:10:25Z"));
+        .andExpect(jsonPath("$.workshopDateTime").value("2023-03-30 11:10:25"));
   }
 }

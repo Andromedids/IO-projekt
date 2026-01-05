@@ -1,6 +1,5 @@
 package pl.wojcikania.sfi.dto;
 
-import java.time.Instant;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -10,7 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-@EqualsAndHashCode
+@EqualsAndHashCode // Ta adnotacja zastępuje cały usunięty kod!
 @ToString
 @Getter
 @Setter
@@ -20,13 +19,10 @@ import lombok.ToString;
 public class Workshop {
 
   private long workshopId;
-
   private long presenterId;
   private String workshopTitle;
   private String workshopDescription;
-
-  private Instant workshopDateTime;
-
+  private String workshopDateTime;
   private List<Long> studentsAtThisWorkshop;
 
 }

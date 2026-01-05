@@ -45,7 +45,7 @@ public class WorkshopEntity {
   private String workshopDescription;
 
   @Column(name = "workshop_date")
-  private Instant workshopDateTime;
+  private String workshopDateTime;
 
   @ManyToMany(mappedBy = "workshopsForThisStudent", fetch = FetchType.EAGER)
   private List<StudentEntity> studentsAtThisWorkshop;

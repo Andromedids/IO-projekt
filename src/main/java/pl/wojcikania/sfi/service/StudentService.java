@@ -18,14 +18,18 @@ public class StudentService {
   @Autowired
   private StudentRepository studentRepository;
 
+  public StudentService(StudentRepository studentRepository) {
+    this.studentRepository = studentRepository;
+  }
+
   public List<Student> getStudents() {
-    List<Student> list = new ArrayList<>();
+      List<Student> list = new ArrayList<>();
     List<StudentEntity> studentsFromDatabase = studentRepository.findAll();
     for (StudentEntity studentEntity : studentsFromDatabase) {
-      Student student = getStudent(studentEntity);
-      list.add(student);
-    }
-    return list;
+          Student student = getStudent(studentEntity);
+          list.add(student);
+      }
+      return list;
   }
 
   private static Student getStudent(StudentEntity studentEntity) {
